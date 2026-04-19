@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PLAYself – Instrumen Physical Literacy Kelas V SD</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Baloo+2:wght@400;600;700;800&display=swap');
+
+  :root {
+    --sky: #38BDF8;
+    --sky-light: #E0F4FF;
+    --green: #4ADE80;
+    --green-light: #DCFCE7;
+    --orange: #FB923C;
+    --orange-light: #FFF0E6;
+    --purple: #A78BFA;
+    --purple-light: #F3F0FF;
+    --yellow: #FACC15;
+    --yellow-light: #FEFCE8;
+    --red: #F87171;
+    --red-light: #FEF2F2;
+    --white: #FFFFFF;
+    --gray-100: #F8FAFC;
+    --gray-200: #E2E8F0;
+    --gray-600: #475569;
+    --gray-800: #1E293B;
+    --radius: 20px;
+    --shadow: 0 4px 20px rgba(0,0,0,0.08);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Nunito', sans-serif;
+    background: linear-gradient(135deg, #E0F4FF 0%, #F3F0FF 50%, #DCFCE7 100%);
+    min-height: 100vh;
+    padding: 24px 16px 48px;
+    color: var(--gray-800);
+  }
+
+  /* ─── COVER ─── */
+  .cover {
+    max-width: 760px;
+    margin: 0 auto 32px;
+    background: white;
+    border-radius: 28px;
+    padding: 36px 32px 28px;
+    box-shadow: var(--shadow);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .cover::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 8px;
+    background: linear-gradient(90deg, var(--sky), var(--purple), var(--green), var(--orange), var(--yellow));
+  }
+  .cover-emoji { font-size: 56px; margin-bottom: 8px; }
+  .cover h1 {
+    font-family: 'Baloo 2', cursive;
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--gray-800);
+    line-height: 1.2;
+    margin-bottom: 6px;
+  }
+  .cover h1 span { color: var(--sky); }
+  .cover .subtitle {
+    font-size: 0.95rem;
+    color: var(--gray-600);
+    margin-bottom: 20px;
+  }
+  .cover .badge {
+    display: inline-block;
+    background: var(--sky-light);
+    color: #0369A1;
+    border-radius: 999px;
+    padding: 4px 16px;
+    font-size: 0.82rem;
+    font-weight: 700;
+    margin-bottom: 24px;
+  }
+
+  /* Identity form */
+  .identity-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    text-align: left;
+  }
+  .id-field label {
+    display: block;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--gray-600);
+    margin-bottom: 4px;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+  }
+  .id-field .line {
+    border: none;
+    border-bottom: 2.5px dashed var(--gray-200);
+    width: 100%;
+    padding: 6px 4px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--gray-800);
+    outline: none;
+    background: transparent;
+  }
+  .id-field .line:focus { border-bottom-color: var(--sky); }
+
+  /* ─── PETUNJUK ─── */
+  .petunjuk {
+    max-width: 760px;
+    margin: 0 auto 24px;
+    background: var(--yellow-light);
+    border: 2.5px solid var(--yellow);
+    border-radius: var(--radius);
+    padding: 20px 24px;
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+  }
+  .petunjuk .icon { font-size: 28px; flex-shrink: 0; }
+  .petunjuk h3 { font-size: 1rem; font-weight: 800; margin-bottom: 4px; }
+  .petunjuk p { font-size: 0.88rem; line-height: 1.6; color: var(--gray-600); }
+
+  /* ─── SKALA LEGEND ─── */
+  .scale-legend {
+    max-width: 760px;
+    margin: 0 auto 28px;
+    background: white;
+    border-radius: var(--radius);
+    padding: 18px 24px;
+    box-shadow: var(--shadow);
+  }
+  .scale-legend h3 { font-size: 0.9rem; font-weight: 800; color: var(--gray-600); margin-bottom: 14px; text-transform: uppercase; letter-spacing: .05em; }
+  .scale-row {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .scale-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    flex: 1;
+    min-width: 120px;
+    padding: 12px 8px;
+    border-radius: 14px;
+    font-size: 0.82rem;
+    font-weight: 700;
+  }
+  .scale-item .face { font-size: 2.4rem; line-height: 1; }
+  .scale-item .skor { font-size: 1.1rem; font-weight: 900; }
+  .scale-item.s4 { background: var(--green-light); color: #15803D; }
+  .scale-item.s3 { background: var(--sky-light); color: #0369A1; }
+  .scale-item.s2 { background: var(--orange-light); color: #C2410C; }
+  .scale-item.s1 { background: var(--red-light); color: #B91C1C; }
+
+  /* ─── SECTION HEADER ─── */
+  .section-header {
+    max-width: 760px;
+    margin: 0 auto 16px;
+    border-radius: var(--radius);
+    padding: 16px 22px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .section-header.dim1 { background: linear-gradient(135deg, #38BDF8, #0EA5E9); }
+  .section-header.dim2 { background: linear-gradient(135deg, #A78BFA, #7C3AED); }
+  .section-header .sh-icon { font-size: 2rem; }
+  .section-header h2 { font-family: 'Baloo 2', cursive; font-size: 1.15rem; font-weight: 800; color: white; line-height: 1.2; }
+  .section-header p { font-size: 0.8rem; color: rgba(255,255,255,0.85); margin-top: 2px; }
+
+  /* ─── CARD ITEM ─── */
+  .card-wrap {
+    max-width: 760px;
+    margin: 0 auto 14px;
+  }
+  .item-card {
+    background: white;
+    border-radius: var(--radius);
+    padding: 18px 20px;
+    box-shadow: var(--shadow);
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 14px;
+    align-items: start;
+    transition: transform .15s, box-shadow .15s;
+  }
+  .item-card:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(0,0,0,0.11); }
+
+  .item-num {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.9rem; font-weight: 900;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .dim1 .item-num { background: var(--sky-light); color: #0369A1; }
+  .dim2 .item-num { background: var(--purple-light); color: #5B21B6; }
+
+  .item-content {}
+  .item-text {
+    font-size: 0.95rem;
+    font-weight: 700;
+    line-height: 1.4;
+    margin-bottom: 12px;
+    color: var(--gray-800);
+  }
+  .item-text .tag {
+    display: inline-block;
+    font-size: 0.68rem;
+    font-weight: 800;
+    padding: 2px 8px;
+    border-radius: 999px;
+    margin-right: 6px;
+    vertical-align: middle;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+  }
+  .tag-env { background: var(--sky-light); color: #0369A1; }
+  .tag-aff { background: var(--purple-light); color: #5B21B6; }
+  .tag-cog { background: var(--green-light); color: #15803D; }
+  .tag-rev { background: var(--red-light); color: #B91C1C; }
+
+  /* Radio options */
+  .options {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .opt-label {
+    flex: 1; min-width: 60px;
+    cursor: pointer;
+  }
+  .opt-label input { display: none; }
+  .opt-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    padding: 10px 6px 8px;
+    border-radius: 14px;
+    border: 2.5px solid var(--gray-200);
+    background: var(--gray-100);
+    transition: all .15s;
+    user-select: none;
+  }
+  .opt-box .face { font-size: 1.8rem; line-height: 1; }
+  .opt-box .opt-label-text { font-size: 0.68rem; font-weight: 800; color: var(--gray-600); text-align: center; line-height: 1.2; }
+  .opt-box .opt-score { font-size: 0.75rem; font-weight: 900; color: var(--gray-600); }
+
+  .opt-label input:checked + .opt-box.s4 { background: var(--green-light); border-color: var(--green); }
+  .opt-label input:checked + .opt-box.s4 .opt-label-text,
+  .opt-label input:checked + .opt-box.s4 .opt-score { color: #15803D; }
+  .opt-label input:checked + .opt-box.s3 { background: var(--sky-light); border-color: var(--sky); }
+  .opt-label input:checked + .opt-box.s3 .opt-label-text,
+  .opt-label input:checked + .opt-box.s3 .opt-score { color: #0369A1; }
+  .opt-label input:checked + .opt-box.s2 { background: var(--orange-light); border-color: var(--orange); }
+  .opt-label input:checked + .opt-box.s2 .opt-label-text,
+  .opt-label input:checked + .opt-box.s2 .opt-score { color: #C2410C; }
+  .opt-label input:checked + .opt-box.s1 { background: var(--red-light); border-color: var(--red); }
+  .opt-label input:checked + .opt-box.s1 .opt-label-text,
+  .opt-label input:checked + .opt-box.s1 .opt-score { color: #B91C1C; }
+
+  .opt-label:hover .opt-box { border-color: #94A3B8; transform: scale(1.04); }
+
+  /* ─── SKOR PANEL ─── */
+  .score-panel {
+    max-width: 760px;
+    margin: 28px auto 0;
+    background: white;
+    border-radius: var(--radius);
+    padding: 24px;
+    box-shadow: var(--shadow);
+  }
+  .score-panel h3 { font-family: 'Baloo 2', cursive; font-size: 1.1rem; font-weight: 800; margin-bottom: 16px; text-align: center; }
+  .score-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 18px;
+  }
+  .score-box {
+    border-radius: 14px;
+    padding: 14px;
+    text-align: center;
+  }
+  .score-box.b1 { background: var(--sky-light); }
+  .score-box.b2 { background: var(--purple-light); }
+  .score-box.b3 { background: var(--yellow-light); }
+  .score-box .sb-label { font-size: 0.72rem; font-weight: 800; color: var(--gray-600); text-transform: uppercase; letter-spacing: .04em; margin-bottom: 8px; }
+  .score-box .sb-val { font-size: 1.6rem; font-weight: 900; color: var(--gray-800); min-height: 36px; }
+
+  .btn-hitung {
+    display: block; width: 100%;
+    background: linear-gradient(135deg, var(--sky), var(--purple));
+    color: white;
+    border: none;
+    border-radius: 14px;
+    padding: 14px;
+    font-family: 'Baloo 2', cursive;
+    font-size: 1.05rem;
+    font-weight: 800;
+    cursor: pointer;
+    transition: opacity .15s, transform .1s;
+  }
+  .btn-hitung:hover { opacity: .9; transform: translateY(-1px); }
+
+  .score-interp {
+    margin-top: 20px;
+    display: none;
+  }
+  .score-interp.show { display: block; }
+  .score-interp h4 { font-size: 0.85rem; font-weight: 800; color: var(--gray-600); margin-bottom: 10px; text-transform: uppercase; letter-spacing: .04em; }
+  .interp-row {
+    display: flex; gap: 8px; align-items: center;
+    padding: 8px 12px; border-radius: 10px;
+    background: var(--gray-100);
+    margin-bottom: 6px;
+    font-size: 0.82rem;
+  }
+  .interp-row .range { font-weight: 900; min-width: 80px; }
+  .interp-row.cat4 { background: var(--green-light); }
+  .interp-row.cat3 { background: var(--sky-light); }
+  .interp-row.cat2 { background: var(--orange-light); }
+  .interp-row.cat1 { background: var(--red-light); }
+
+  /* ─── FOOTER ─── */
+  .footer {
+    max-width: 760px;
+    margin: 24px auto 0;
+    text-align: center;
+    font-size: 0.75rem;
+    color: var(--gray-600);
+    line-height: 1.6;
+  }
+
+  /* ─── SPACER ─── */
+  .spacer { max-width: 760px; margin: 0 auto 24px; }
+
+  @media print {
+    body { background: white; padding: 12px; }
+    .btn-hitung, .score-panel { display: none; }
+    .item-card:hover { transform: none; box-shadow: var(--shadow); }
+  }
+  @media (max-width: 500px) {
+    .identity-grid { grid-template-columns: 1fr; }
+    .score-grid { grid-template-columns: 1fr; }
+    .cover h1 { font-size: 1.5rem; }
+    .options { gap: 5px; }
+    .opt-box .face { font-size: 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ══════════ COVER ══════════ -->
+<div class="cover">
+  <div class="cover-emoji">🏃‍♂️⚽🏊‍♀️🤸‍♂️</div>
+  <h1>PLAY<span>self</span></h1>
+  <div class="subtitle">Instrumen Penilaian Diri Literasi Fisik Siswa</div>
+  <div class="badge">📚 Kelas V SD · PJOK</div>
+
+  <div class="identity-grid">
+    <div class="id-field">
+      <label>👤 Nama Siswa</label>
+      <input class="line" type="text" placeholder="Tulis namamu...">
+    </div>
+    <div class="id-field">
+      <label>🏫 Kelas / Rombel</label>
+      <input class="line" type="text" placeholder="Contoh: 5A">
+    </div>
+    <div class="id-field">
+      <label>📅 Tanggal</label>
+      <input class="line" type="date">
+    </div>
+    <div class="id-field">
+      <label>⚧ Jenis Kelamin</label>
+      <input class="line" type="text" placeholder="Laki-laki / Perempuan">
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ PETUNJUK ══════════ -->
+<div class="petunjuk">
+  <div class="icon">💡</div>
+  <div>
+    <h3>Petunjuk Pengisian</h3>
+    <p>Bacalah setiap pernyataan dengan seksama. Pilih <strong>satu</strong> wajah yang paling menggambarkan dirimu dengan cara <strong>melingkari atau mewarnainya</strong>. Tidak ada jawaban benar atau salah — jawablah sesuai keadaanmu yang sebenarnya! 😊</p>
+  </div>
+</div>
+
+<!-- ══════════ LEGENDA SKALA ══════════ -->
+<div class="scale-legend">
+  <h3>🎭 Arti Setiap Wajah</h3>
+  <div class="scale-row">
+    <div class="scale-item s4">
+      <div class="face">😁</div>
+      <div class="skor">4</div>
+      <div>Selalu</div>
+    </div>
+    <div class="scale-item s3">
+      <div class="face">🙂</div>
+      <div class="skor">3</div>
+      <div>Sering</div>
+    </div>
+    <div class="scale-item s2">
+      <div class="face">😐</div>
+      <div class="skor">2</div>
+      <div>Kadang-kadang</div>
+    </div>
+    <div class="scale-item s1">
+      <div class="face">😞</div>
+      <div class="skor">1</div>
+      <div>Tidak Pernah</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ DIMENSI 1 ══════════ -->
+<div class="section-header dim1">
+  <div class="sh-icon">🌍</div>
+  <div>
+    <h2>Dimensi 1: Kompetensi Lingkungan Gerak</h2>
+    <p>Seberapa baik kamu beraktivitas di berbagai tempat?</p>
+  </div>
+</div>
+
+<!-- Item D1 -->
+<div class="card-wrap">
+  <div class="item-card">
+    <div class="item-num dim1">1</div>
+    <div class="item-content">
+      <div class="item-text"><span class="tag tag-env">Lingkungan</span>Saya bisa melakukan olahraga dan permainan dengan baik <strong>di lapangan / halaman sekolah</strong>.</div>
+      <div class="options">
+        <label class="opt-label"><input type="radio" name="q1" value="4"><div class="opt-box s4"><div class="face">😁</div><div class="opt-label-text">Selalu</div><div class="opt-score">4</div></div></label>
+        <label class="opt-label"><input type="radio" name="q1" value="3"><div class="opt-box s3"><div class="face">🙂</div><div class="opt-label-text">Sering</div><div class="opt-score">3</div></div></label>
+        <label class="opt-label"><input type="radio" name="q1" value="2"><div class="opt-box s2"><div class="face">😐</div><div class="opt-label-text">Kadang-kadang</div><div class="opt-score">2</div></div></label>
+        <label class="opt-label"><input type="radio" name="q1" value="1"><div class="opt-box s1"><div class="face">😞</div><div class="opt-label-text">Tidak Pernah</div><div class="opt-score">1</div></div></label>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card-wrap">
+  <div class="item-card">
+    <div class="item-num dim1">2</div>
+    <div class="item-content">
+      <div class="item-text"><span class="tag tag-env">Lingkungan</span>Saya bisa bermain dan berolahraga dengan baik <strong>di dalam ruangan (gym/aula)</strong>.</div>
+      <div class="options">
+        <label class="opt-label"><input type="radio" name="q2" value="4"><div class="opt-box s4"><div class="face">😁</div><div class="opt-label-text">Selalu</div><div class="opt-score">4</div></div></label>
+        <label class="opt-label"><input type="radio" name="q2" value="3"><div class="opt-box s3"><div class="face">🙂</div><div class="opt-label-text">Sering</div><div class="opt-score">3</div></div></label>
+        <label class="opt-label"><input type="radio" name="q2" value="2"><div class="opt-box s2"><div class="face">😐</div><div class="opt-label-text">Kadang-kadang</div><div class="opt-score">2</div></div></label>
+        <label class="opt-label"><input type="radio" name="q2" value="1"><div class="opt-box s1"><div class="face">😞</div><div class="opt-label-text">Tidak Pernah</div><div class="opt-score">1</div></div></label>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card-wrap">
+  <div class="item-card">
+    <div class="item-num dim1">3</div>
+    <div class="item-content">
+      <div class="item-text"><span class="tag tag-env">Lingkungan</span>Saya bisa melakukan aktivitas fisik dengan baik <strong>di air / kolam renang</strong>.</div>
+      <div class="options">
+        <label class="opt-label"><input type="radio" name="q3" value="4"><div class="opt-box s4"><div class="face">😁</div><div class="opt-label-text">Selalu</div><div class="opt-score">4</div></div></label>
+        <label class="opt-label"><input type="radio" name="q3" value="3"><div class="opt-box s3"><div class="face">🙂</div><div class="opt-label-text">Sering</div><div class="opt-score">3</div></div></label>
+        <label class="opt-label"><input type="radio" name="q3" value="2"><div class="opt-box s2"><div class="face">😐</div><div class="opt-label-text">Kadang-kadang</div><div class="opt-score">2</div></div></label>
+        <label class="opt-label"><input type="radio" name="q3" value="1"><div class="opt-box s1"><div class="face">😞</div><div class="opt-label-text">Tidak Pernah</div><div class="opt-score">1</div></div></label>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card-wrap">
+  <div class="item-card">
+    <div class="item-num dim1">4</div>
+    <div class="item-content">
+      <div class="item-text"><span class="tag tag-env">Lingkungan</span>Saya bisa beraktivitas fisik dengan baik <strong>di alam terbuka / luar ruangan</strong> (taman, sawah, pantai, dll.).</div>
+      <div class="options">
+        <label class="opt-label"><input type="radio" name="q4" value="4"><div class="opt-box s4"><div class="face">😁</div><div class="opt-label-text">Selalu</div><div class="opt-score">4</div></div></label>
+        <label class="opt-label"><input type="radio" name="q4" value="3"><div class="opt-box s3"><div class="face">🙂</div><div class="opt-label-text">Sering</div><div class="opt-score">3</div></div></label>
+        <label class="opt-label"><input type="radio" name="q4" value="2"><div class="opt-box s2"><div class="face">😐</div><div class="opt-label-text">Kadang-kadang</div><div class="opt-score">2</div></div></label>
+        <label class="opt-label"><input type="radio" name="q4" value="1"><div class="opt-box s1"><div class="face">😞</div><div class="opt-label-text">Tidak Pernah</div><div class="opt-score">1</div></div></label>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card-wrap">
+  <div class="item-card">
+    <div class="item-num dim1">5</div>
+    <div class="item-content">
+      <div class="item-text"><span class="tag tag-env">Lingkungan</span>Saya bisa bermain dan berolahraga dengan baik <strong>di area bermain / playground</strong>.</div>
+      <div class="options">
+        <label class="opt-label"><input type="radio" name="q5" value="4"><div class="opt-box s4"><div class="face">😁</div><div class="opt-label-text">Selalu</div><div class="opt-score">4</div></div></label>
+        <label class="opt-label"><input type="radio" name="q5" value="3"><div class="opt-box s3"><div class="face">🙂</div><div class="opt-label-text">Sering</div><div class="opt-score">3</div></div></label>
+        <label class="opt-label"><input type="radio" name="q5" value="2"><div class="opt-box s2"><div class="face">😐</div><div class="opt-label-text">Kadang-kadang</div><div class="opt-score">2</div></div></label>
+        <label class="opt-label"><input type="radio" name="q5" value="1"><div class="opt-box s1"><div class="face">😞</div><div class="opt-label-text">Tidak Pernah</div><div class="opt-score">1</div></div></label>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card-wrap">
+  <div class="item-card">
+    <div class="item-num dim1">6</div>
+    <div class="item-content">
+      <div class="item-text"><span class="tag tag-env">Lingkungan</span>Saya merasa nyaman dan percaya diri saat mencoba olahraga atau permainan <strong>di tempat baru</strong>.</div>
+      <div class="options">
+        <label class="opt-label"><input type="radio" name="q6" value="4"><div class="opt-box s4"><div class="face">😁</div><div class="opt-label-text">Selalu</div><div class="opt-score">4</div></div></label>
+        <label class="opt-label"><input type="radio" name="q6" value="3"><div class="opt-box s3"><div class="face">🙂</div><div class="opt-label-text">Sering</div><div class="opt-score">3</div></div></label>
+        <label class="opt-label"><input type="radio" name="q6" value="2"><div class="opt-box s2"><div class="face">😐</div><div class="opt-label-text">Kadang-kadang</div><div class="opt-score">2</div></div></label>
+        <label class="opt-label"><input type="radio" name="q6" value="1"><div class="opt-box s1"><div class="face">😞</div><div class="opt-label-text">Tidak Pernah</div><div class="opt-score">1</div></div></label>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="spacer" style="height:8px;"></div>
+
+<!-- ══════════ DIMENSI 2 ══════════ -->
+<div class="section-header dim2">
+  <div class="sh-icon">💭</div>
+  <div>
+    <h2>Dimensi 2: Deskripsi Diri Literasi Fisik</h2>
+    <p>Bagaimana perasaan & pikiranmu tentang aktivitas fisik?</p>
+  </div>
+</div>
+
+<!-- Afektif -->
+<div class="card-wrap">
+  <div class="item-card">
+    <div class="item-num dim2">7</div>
+    <div class="item-content">
+      <div class="item-text"><span class="tag tag-aff">Afektif</span>Saya merasa <strong>senang dan bahagia</strong> saat melakukan aktivitas fisik atau olahraga.</div>
+      <div class="options">
+        <label class="opt-label"><input type="radio" name="q7" value="4"><div class="opt-box s4"><div class="face">😁</div><div class="opt-label-text">Selalu</div><div class="opt-score">4</div></div></label>
+        <label class="opt-label"><input type="radio" name="q7" value="3"><div class="opt-box s3"><div class="face">🙂</div><div class="opt-label-text">Sering</div><div class="opt-score">3</div></div></label>
+        <label class="opt-label"><input type="radio" name="q7" value="2"><div class="opt-box s2"><div class="face">😐</div><div class="opt-label-text">Kadang-kadang</div><div class="opt-score">2</div></div></label>
+        <label class="opt-label"><input type="radio" name="q7" value="1"><div class="opt-box s1"><div class="face">😞</div><div class="opt-label-text">Tidak Pernah</div><div class="opt-score">1</div></div></label>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card-wrap">
+  <div class="item-card">
+    <div class="item-num dim2">8</div>
+    <div class="item-content">
+      <div class="item-text"><span class="tag tag-aff">Afektif</span>Saya merasa <strong>percaya diri</strong> saat melakukan gerakan atau keterampilan olahraga.</div>
+      <div class="options">
+        <label class="opt-label"><input type="radio" name="q8" value="4"><div class="opt-box s4"><div class="face">😁</div><div class="opt-label-text">Selalu</div><div class="opt-score">4</div></div></label>
+        <label class="opt-label"><input type="radio" name="q8" value="3"><div class="opt-box s3"><div class="face">🙂</div><div class="opt-label-text">Sering</div><div class="opt-score">3</div></div></label>
+        <label class="opt-label"><input type="radio" name="q8" value="2"><div class="opt-box s2"><div class="face">😐</div><div class="opt-label-text">Kadang-kadang</div><div class="opt-score">2</div></div></label>
+        <label class="opt-label"><input type="radio" name="q8" value="1"><div class="opt-box s1"><div class="face">😞</div><div class="opt-label-text">Tidak Pernah</div><div class="opt-score">1</div></div></label>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card-wrap">
+  <div class="item-card">
+    <div class="item-num dim2">9</div>
+    <div class="item-content">
+      <div class="item-text"><span class="tag tag-aff">Afektif</span>Saya <strong>bersemangat</strong> dan termotivasi untuk aktif bergerak setiap hari.</div>
+      <div class="options">
+        <label class="opt-label"><input type="radio" name="q9" value="4"><div class="opt-box s4"><div class="face">😁</div><div class="opt-label-text">Selalu</div><div class="opt-score">4</div></div></label>
+        <label class="opt-label"><input type="radio" name="q9" value="3"><div class="opt-box s3"><div class="face">🙂</div><div class="opt-label-text">Sering</div><div class="opt-score">3</div></div></label>
+        <label class="opt-label"><input type="radio" name="q9" value="2"><div class="opt-box s2"><div class="face">😐</div><div class="opt-label-text">Kadang-kadang</div><div class="opt-score">2</div></div></label>
+        <label class="opt-label"><input type="radio" name="q9" value="1"><div class="opt-box s1"><div class="face">😞</div><div class="opt-label-text">Tidak Pernah</div><div class="opt-score">1</div></div></label>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card-wrap">
+  <div class="item-card">
+    <div class="item-num dim2">10</div>
+    <div class="item-content">
+      <div class="item-text"><span class="tag tag-aff">Afektif</span>Saya merasa <strong>lebih bahagia dan lebih baik</strong> setelah berolahraga atau bergerak aktif.</div>
+      <div class="options">
+        <label class="opt-label"><input type="radio" name="q10" value="4"><div class="opt-box s4"><div class="face">😁</div><div class="opt-label-text">Selalu</div><div class="opt-score">4</div></div></label>
+        <label class="opt-label"><input type="radio" name="q10" value="3"><div class="opt-box s3"><div class="face">🙂</div><div class="opt-label-text">Sering</div><div class="opt-score">3</div></div></label>
+        <label class="opt-label"><input type="radio" name="q10" value="2"><div class="opt-box s2"><div class="face">😐</div><div class="opt-label-text">Kadang-kadang</div><div class="opt-score">2</div></div></label>
+        <label class="opt-label"><input type="radio" name="q10" value="1"><div class="opt-box s1"><div class="face">😞</div><div class="opt-label-text">Tidak Pernah</div><div class="opt-score">1</div></div></label>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Kognitif -->
+<div class="card-wrap">
+  <div class="item-card">
+    <div class="item-num dim2">11</div>
+    <div class="item-content">
+      <div class="item-text"><span class="tag tag-cog">Kognitif</span>Saya merasa memiliki <strong>cukup kemampuan gerak</strong> untuk mengikuti semua olahraga dan permainan yang saya inginkan.</div>
+      <div class="options">
+        <label class="opt-label"><input type="radio" name="q11" value="4"><div class="opt-box s4"><div class="face">😁</div><div class="opt-label-text">Selalu</div><div class="opt-score">4</div></div></label>
+        <label class="opt-label"><input type="radio" name="q11" value="3"><div class="opt-box s3"><div class="face">🙂</div><div class="opt-label-text">Sering</div><div class="opt-score">3</div></div></label>
+        <label class="opt-label"><input type="radio" name="q11" value="2"><div class="opt-box s2"><div class="face">😐</div><div class="opt-label-text">Kadang-kadang</div><div class="opt-score">2</div></div></label>
+        <label class="opt-label"><input type="radio" name="q11" value="1"><div class="opt-box s1"><div class="face">😞</div><div class="opt-label-text">Tidak Pernah</div><div class="opt-score">1</div></div></label>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card-wrap">
+  <div class="item-card">
+    <div class="item-num dim2">12</div>
+    <div class="item-content">
+      <div class="item-text"><span class="tag tag-cog">Kognitif</span>Saya <strong>memahami cara melakukan gerakan</strong> dengan benar dan aman saat berolahraga.</div>
+      <div class="options">
+        <label class="opt-label"><input type="radio" name="q12" value="4"><div class="opt-box s4"><div class="face">😁</div><div class="opt-label-text">Selalu</div><div class="opt-score">4</div></div></label>
+        <label class="opt-label"><input type="radio" name="q12" value="3"><div class="opt-box s3"><div class="face">🙂</div><div class="opt-label-text">Sering</div><div class="opt-score">3</div></div></label>
+        <label class="opt-label"><input type="radio" name="q12" value="2"><div class="opt-box s2"><div class="face">😐</div><div class="opt-label-text">Kadang-kadang</div><div class="opt-score">2</div></div></label>
+        <label class="opt-label"><input type="radio" name="q12" value="1"><div class="opt-box s1"><div class="face">😞</div><div class="opt-label-text">Tidak Pernah</div><div class="opt-score">1</div></div></label>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card-wrap">
+  <div class="item-card">
+    <div class="item-num dim2">13</div>
+    <div class="item-content">
+      <div class="item-text"><span class="tag tag-cog">Kognitif</span>Saya mengerti <strong>istilah dan aturan</strong> yang digunakan guru PJOK saat menjelaskan olahraga.</div>
+      <div class="options">
+        <label class="opt-label"><input type="radio" name="q13" value="4"><div class="opt-box s4"><div class="face">😁</div><div class="opt-label-text">Selalu</div><div class="opt-score">4</div></div></label>
+        <label class="opt-label"><input type="radio" name="q13" value="3"><div class="opt-box s3"><div class="face">🙂</div><div class="opt-label-text">Sering</div><div class="opt-score">3</div></div></label>
+        <label class="opt-label"><input type="radio" name="q13" value="2"><div class="opt-box s2"><div class="face">😐</div><div class="opt-label-text">Kadang-kadang</div><div class="opt-score">2</div></div></label>
+        <label class="opt-label"><input type="radio" name="q13" value="1"><div class="opt-box s1"><div class="face">😞</div><div class="opt-label-text">Tidak Pernah</div><div class="opt-score">1</div></div></label>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card-wrap">
+  <div class="item-card">
+    <div class="item-num dim2">14</div>
+    <div class="item-content">
+      <div class="item-text"><span class="tag tag-cog">Kognitif</span>Saya tahu <strong>manfaat olahraga</strong> bagi kesehatan tubuh saya.</div>
+      <div class="options">
+        <label class="opt-label"><input type="radio" name="q14" value="4"><div class="opt-box s4"><div class="face">😁</div><div class="opt-label-text">Selalu</div><div class="opt-score">4</div></div></label>
+        <label class="opt-label"><input type="radio" name="q14" value="3"><div class="opt-box s3"><div class="face">🙂</div><div class="opt-label-text">Sering</div><div class="opt-score">3</div></div></label>
+        <label class="opt-label"><input type="radio" name="q14" value="2"><div class="opt-box s2"><div class="face">😐</div><div class="opt-label-text">Kadang-kadang</div><div class="opt-score">2</div></div></label>
+        <label class="opt-label"><input type="radio" name="q14" value="1"><div class="opt-box s1"><div class="face">😞</div><div class="opt-label-text">Tidak Pernah</div><div class="opt-score">1</div></div></label>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Item Reverse -->
+<div class="card-wrap">
+  <div class="item-card">
+    <div class="item-num dim2">15</div>
+    <div class="item-content">
+      <div class="item-text"><span class="tag tag-rev">🔄 Terbalik</span>Saya merasa <strong>malas dan tidak mau</strong> bergerak aktif saat jam olahraga.</div>
+      <div class="options">
+        <label class="opt-label"><input type="radio" name="q15" value="4"><div class="opt-box s4"><div class="face">😁</div><div class="opt-label-text">Selalu</div><div class="opt-score">1*</div></div></label>
+        <label class="opt-label"><input type="radio" name="q15" value="3"><div class="opt-box s3"><div class="face">🙂</div><div class="opt-label-text">Sering</div><div class="opt-score">2*</div></div></label>
+        <label class="opt-label"><input type="radio" name="q15" value="2"><div class="opt-box s2"><div class="face">😐</div><div class="opt-label-text">Kadang-kadang</div><div class="opt-score">3*</div></div></label>
+        <label class="opt-label"><input type="radio" name="q15" value="1"><div class="opt-box s1"><div class="face">😞</div><div class="opt-label-text">Tidak Pernah</div><div class="opt-score">4*</div></div></label>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card-wrap">
+  <div class="item-card">
+    <div class="item-num dim2">16</div>
+    <div class="item-content">
+      <div class="item-text"><span class="tag tag-aff">Afektif</span>Saya <strong>mau mengajak teman</strong> untuk bermain atau berolahraga bersama.</div>
+      <div class="options">
+        <label class="opt-label"><input type="radio" name="q16" value="4"><div class="opt-box s4"><div class="face">😁</div><div class="opt-label-text">Selalu</div><div class="opt-score">4</div></div></label>
+        <label class="opt-label"><input type="radio" name="q16" value="3"><div class="opt-box s3"><div class="face">🙂</div><div class="opt-label-text">Sering</div><div class="opt-score">3</div></div></label>
+        <label class="opt-label"><input type="radio" name="q16" value="2"><div class="opt-box s2"><div class="face">😐</div><div class="opt-label-text">Kadang-kadang</div><div class="opt-score">2</div></div></label>
+        <label class="opt-label"><input type="radio" name="q16" value="1"><div class="opt-box s1"><div class="face">😞</div><div class="opt-label-text">Tidak Pernah</div><div class="opt-score">1</div></div></label>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ SKOR PANEL ══════════ -->
+<div class="score-panel">
+  <h3>📊 Rekap Skor (Untuk Guru)</h3>
+  <div class="score-grid">
+    <div class="score-box b1">
+      <div class="sb-label">🌍 Dimensi 1<br>(No. 1–6)</div>
+      <div class="sb-val" id="skor1">–</div>
+    </div>
+    <div class="score-box b2">
+      <div class="sb-label">💭 Dimensi 2<br>(No. 7–16)</div>
+      <div class="sb-val" id="skor2">–</div>
+    </div>
+    <div class="score-box b3">
+      <div class="sb-label">⭐ Total Skor</div>
+      <div class="sb-val" id="skorTotal">–</div>
+    </div>
+  </div>
+  <button class="btn-hitung" onclick="hitungSkor()">🧮 Hitung Skor Otomatis</button>
+
+  <div class="score-interp" id="interp">
+    <br>
+    <h4>📋 Panduan Interpretasi Total Skor (16 item × 4 = maks. 64)</h4>
+    <div class="interp-row cat4"><span class="range">55 – 64</span> 🌟 <strong>Sangat Tinggi</strong> — Literasi fisik berkembang sangat baik</div>
+    <div class="interp-row cat3"><span class="range">43 – 54</span> ✅ <strong>Tinggi</strong> — Literasi fisik berkembang dengan baik</div>
+    <div class="interp-row cat2"><span class="range">31 – 42</span> ⚠️ <strong>Cukup</strong> — Literasi fisik perlu ditingkatkan</div>
+    <div class="interp-row cat1"><span class="range">16 – 30</span> 🔴 <strong>Rendah</strong> — Literasi fisik perlu perhatian khusus</div>
+  </div>
+</div>
+
+<!-- ══════════ FOOTER ══════════ -->
+<div class="footer">
+  <p>📖 <strong>Sumber:</strong> Diadaptasi dari format PLAYself (Jefferies, Bremer, Kozera, Cairney & Kriellaars, 2021) dengan penyesuaian konteks PJOK Kelas V SD Indonesia.</p>
+  <p style="margin-top:4px;">Jefferies, P., et al. (2021). Psychometric properties and construct validity of PLAYself. <em>Applied Physiology, Nutrition, and Metabolism.</em></p>
+</div>
+
+<script>
+function hitungSkor() {
+  let d1 = 0, d2 = 0, allFilled = true;
+
+  // Dimensi 1: Q1-Q6
+  for (let i = 1; i <= 6; i++) {
+    const sel = document.querySelector(`input[name="q${i}"]:checked`);
+    if (sel) d1 += parseInt(sel.value);
+    else allFilled = false;
+  }
+
+  // Dimensi 2: Q7-Q16 (Q15 adalah reverse)
+  for (let i = 7; i <= 16; i++) {
+    const sel = document.querySelector(`input[name="q${i}"]:checked`);
+    if (sel) {
+      let val = parseInt(sel.value);
+      if (i === 15) val = 5 - val; // reverse scoring
+      d2 += val;
+    } else allFilled = false;
+  }
+
+  const total = d1 + d2;
+
+  document.getElementById('skor1').textContent = d1 > 0 ? d1 + ' / 24' : '–';
+  document.getElementById('skor2').textContent = d2 > 0 ? d2 + ' / 40' : '–';
+  document.getElementById('skorTotal').textContent = total > 0 ? total + ' / 64' : '–';
+
+  document.getElementById('interp').classList.add('show');
+
+  if (!allFilled) alert('⚠️ Masih ada pernyataan yang belum dijawab! Pastikan semua pernyataan sudah diisi.');
+}
+</script>
+</body>
+</html>
